@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+  build:
+    commands:
+      - echo "Zipping Lambda..."
+      - mkdir -p build
+      - zip -j build/lambda.zip lambda_function.py
+  post_build:
+    commands:
+      - echo "Updating Lambda code..."
+      - aws lambda update-function-code \
+          --function-name sum_function \
+          --zip-file fileb://build/lambda.zip
+artifacts:
+  files:
+    - build/lambda.zip
