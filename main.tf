@@ -141,7 +141,7 @@ resource "aws_iam_role" "codepipeline_role" {
     Statement = [{
       Effect = "Allow",
       Principal = { Service = "codepipeline.amazonaws.com" },
-      Action = "sts:AssumeRole"
+      Action = ["sts:AssumeRole", "iam:GetRole"]
     }]
   })
 }
