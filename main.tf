@@ -159,7 +159,8 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
         "s3:*",
         "iam:PassRole",
         "kms:Decrypt",
-        "codestar-connections:UseConnection"
+        "codestar-connections:UseConnection",
+        "iam:GetRole"
       ],
       Resource = "*"
     }]
