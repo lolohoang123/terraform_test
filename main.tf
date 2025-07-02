@@ -82,7 +82,8 @@ resource "aws_iam_role_policy" "codebuild_policy" {
           "logs:*",
           "s3:*",
           "lambda:UpdateFunctionCode",
-          "iam:PassRole"
+          "iam:PassRole",
+          "iam:GetRole"
         ],
         Resource = "*"
       }
