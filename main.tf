@@ -31,7 +31,7 @@ resource "aws_iam_role" "lambda_role" {
     Statement = [{
       Effect = "Allow",
       Principal = { Service = "lambda.amazonaws.com" },
-      Action = "sts:AssumeRole"
+      Action = ["sts:AssumeRole", "iam:GetRole"]
     }]
   })
 }
@@ -64,7 +64,7 @@ resource "aws_iam_role" "codebuild_role" {
     Statement = [{
       Effect = "Allow",
       Principal = { Service = "codebuild.amazonaws.com" },
-      Action = "sts:AssumeRole"
+      Action = ["sts:AssumeRole", "iam:GetRole"]
     }]
   })
 }
