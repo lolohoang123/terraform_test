@@ -1,13 +1,12 @@
 # ✅ PROVIDER
 
-resource "random_id" "bucket_id" {
-  byte_length = 4
+provider "aws" {
+  region = "ap-southeast-1"
 }
-
 
 module "s3" {
   source = "../modules/s3"
-  bucket_name = "lambda-artifact-${random_id.bucket_id.hex}"
+  bucket_name = "lambda-artifact-locht-terraform-test"
   codepipeline_role_arn = module.iam.codepipeline_role_arn
   codebuild_role_arn    = module.iam.codebuild_role_arn
 }
@@ -114,7 +113,7 @@ resource "aws_codepipeline" "pipeline_1" {
   role_arn = module.iam.codepipeline_service_role_arn
 
   artifact_store {
-    location = "lambda-artifact-${random_id.bucket_id.hex}"
+    location = "lambda-artifact-locht-terraform-test"
     type     = "S3"
   }
 
@@ -164,7 +163,7 @@ resource "aws_codepipeline" "pipeline_2" {
   role_arn = module.iam.codepipeline_service_role_arn
 
   artifact_store {
-    location = "lambda-artifact-${random_id.bucket_id.hex}"
+    location = "lambda-artifact-locht-terraform-test"
     type     = "S3"
   }
 
