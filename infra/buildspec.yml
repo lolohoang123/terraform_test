@@ -9,7 +9,7 @@ phases:
       - cd infra
       - echo "Zipping Lambda..."
       - mkdir -p build
-      - zip -r build/lambda.zip lambda_function.py
+      - zip -r build/lambda.zip lambda/lambda_function.py
       - ls -al build/
   post_build:
     commands:
