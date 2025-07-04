@@ -24,3 +24,4 @@ artifacts:
   files:
     - infra/tfplan
     - infra/plan.json
+    - infra/buildspec-terraform-apply.yml
