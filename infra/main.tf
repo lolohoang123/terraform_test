@@ -216,7 +216,7 @@ resource "aws_codepipeline" "pipeline_2" {
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["source_output"]
-      output_artifacts = ["terraform_output"]
+      output_artifacts = ["plan_output"]
       version          = "1"
 
       configuration = {
@@ -244,7 +244,7 @@ resource "aws_codepipeline" "pipeline_2" {
       category        = "Build"
       owner           = "AWS"
       provider        = "CodeBuild"
-      input_artifacts = ["terraform_output"]
+      input_artifacts = ["plan_output"]
       version          = "1"
 
       configuration = {

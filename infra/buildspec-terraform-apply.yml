@@ -9,6 +9,6 @@ phases:
       - terraform version
   build:
     commands:
-      - aws s3 cp s3://terraform-plan-review/tfplan tfplan
+      #- aws s3 cp s3://terraform-plan-review/tfplan tfplan
       - terraform init
       - terraform apply -auto-approve tfplan
