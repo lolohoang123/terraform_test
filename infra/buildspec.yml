@@ -6,6 +6,7 @@ phases:
       python: 3.12
   build:
     commands:
+      - ls -a
       - cd infra
       - echo "Zipping Lambda..."
       - mkdir -p build
