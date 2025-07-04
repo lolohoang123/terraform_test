@@ -12,11 +12,11 @@ phases:
       - mkdir -p build
       - zip -r build/lambda.zip lambda_function.py
       - ls -al build/
+      - ls -a build/
   post_build:
     commands:
       - echo "Updating Lambda code..."
       - ls -a
-      - cd infra
       - aws lambda update-function-code \
           --function-name sum_function \
           --zip-file fileb://build/lambda.zip
