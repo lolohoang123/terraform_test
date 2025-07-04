@@ -22,6 +22,6 @@ phases:
       - aws s3 cp plan.json s3://terraform-plan-review/plan.pretty.json
 artifacts:
   files:
-    - infra/tfplan
-    - infra/plan.json
-    - infra/buildspec-terraform-apply.yml
+    - tfplan
+    - plan.json
+    - buildspec-terraform-apply.yml
