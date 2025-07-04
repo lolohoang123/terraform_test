@@ -10,6 +10,6 @@ phases:
   build:
     commands:
       #- aws s3 cp s3://terraform-plan-review/tfplan tfplan
-      - cd infra
+      - ls -a
       - terraform init
       - terraform apply -auto-approve tfplan
