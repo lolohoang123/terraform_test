@@ -82,6 +82,26 @@ resource "aws_codebuild_project" "lambda_build" {
   }
 }
 
+resource "aws_codebuild_project" "terraform_apply" {
+  name         = "terraform-apply"
+  service_role = module.iam.codebuild_service_role_arn
+
+  artifacts {
+    type = "CODEPIPELINE"
+  }
+
+  environment {
+    compute_type = "BUILD_GENERAL1_SMALL"
+    image        = "aws/codebuild/standard:7.0"
+    type         = "LINUX_CONTAINER"
+  }
+
+  source {
+    type      = "CODEPIPELINE"
+    buildspec = "infra/buildspec-terraform-apply.yml"
+  }
+}
+
 
 resource "aws_iam_role_policy" "codepipeline_codebuild" {
   name = "codepipeline_codebuild"
@@ -163,7 +183,7 @@ resource "aws_codepipeline" "pipeline_2" {
   role_arn = module.iam.codepipeline_service_role_arn
 
   artifact_store {
-    location = "lambda-artifact-locht-terraform-test"
+    location = "terraform-plan-review"
     type     = "S3"
   }
 
@@ -200,6 +220,34 @@ resource "aws_codepipeline" "pipeline_2" {
 
       configuration = {
         ProjectName = aws_codebuild_project.terraform_build.name
+      }
+    }
+  }
+
+  stage {
+  name = "Approval"
+  action {
+    name     = "ManualApproval"
+    category = "Approval"
+    owner    = "AWS"
+    provider = "Manual"
+    version  = "1"
+    run_order = 1
+    }
+  }
+
+  stage {
+    name = "TerraformApply"
+    action {
+      name            = "Apply"
+      category        = "Build"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      input_artifacts = ["terraform_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = aws_codebuild_project.terraform_apply.name
       }
     }
   }

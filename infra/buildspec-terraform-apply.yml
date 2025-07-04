@@ -3,17 +3,12 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Installing Terraform
       - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.8.0/terraform_1.8.0_linux_amd64.zip
       - unzip terraform.zip
       - mv terraform /usr/local/bin/
       - terraform version
   build:
     commands:
-      - cd infra
+      - aws s3 cp s3://terraform-plan-review/tfplan tfplan
       - terraform init
-      - terraform plan -out=tfplan
-  post_build:
-    commands:
-      - echo "Uploading tfplan to S3..."
-      - aws s3 cp tfplan s3://terraform-plan-review/tfplan
+      - terraform apply -auto-approve tfplan
