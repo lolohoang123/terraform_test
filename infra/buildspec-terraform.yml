@@ -20,7 +20,7 @@ phases:
       - echo "Uploading tfplan to S3..."
       - aws s3 cp tfplan s3://terraform-plan-review/tfplan
       - aws s3 cp plan.json s3://terraform-plan-review/plan.pretty.json
-  artifacts:
+artifacts:
   files:
     - tfplan
     - plan.json
