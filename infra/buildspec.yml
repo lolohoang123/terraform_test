@@ -6,9 +6,11 @@ phases:
       python: 3.12
   build:
     commands:
+      - cd infra
       - echo "Zipping Lambda..."
       - mkdir -p build
-      - zip -j build/lambda.zip lambda_function.py
+      - zip -r build/lambda.zip lambda_function.py
+      - ls -al build/
   post_build:
     commands:
       - echo "Updating Lambda code..."
