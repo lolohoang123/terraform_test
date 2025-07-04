@@ -14,8 +14,9 @@ phases:
       - terraform init
       - terraform plan -out=tfplan
       - terraform show -json tfplan > plan.json
+      - jq '.' plan.json > plan.pretty.json
   post_build:
     commands:
       - echo "Uploading tfplan to S3..."
       - aws s3 cp tfplan s3://terraform-plan-review/tfplan
-      - aws s3 cp plan.json s3://terraform-plan-review/plan.json
+      - aws s3 cp plan.json s3://terraform-plan-review/plan.pretty.json
