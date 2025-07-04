@@ -15,4 +15,6 @@ phases:
       - terraform plan -out=tfplan
   post_build:
     commands:
-      - terraform apply -auto-approve tfplan
+      - echo "Terraform plan completed. Apply manually with:"
+      - echo "terraform apply tfplan"
+      #- terraform apply -auto-approve tfplan
