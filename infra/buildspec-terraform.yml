@@ -10,6 +10,7 @@ phases:
       - terraform version
   build:
     commands:
+      - cd infra
       - terraform init
       - terraform plan -out=tfplan
   post_build:

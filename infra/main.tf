@@ -30,7 +30,7 @@ module "iam" {
 resource "aws_lambda_function" "sum_function" {
   function_name = "sum_function"
   role          = module.iam.lambda_execution_role_arn
-  handler       = "lambda_function.handler"
+  handler       = "lambda/lambda_function.handler"
   runtime       = "python3.12"
   filename      = "build/lambda.zip"
   source_code_hash = filebase64sha256("build/lambda.zip")
@@ -59,7 +59,7 @@ resource "aws_codebuild_project" "terraform_build" {
 
   source {
     type      = "CODEPIPELINE"
-    buildspec = "buildspec-terraform.yml"
+    buildspec = "infra/buildspec-terraform.yml"
   }
 }
 
@@ -79,7 +79,7 @@ resource "aws_codebuild_project" "lambda_build" {
 
   source {
     type      = "CODEPIPELINE"
-    buildspec = "buildspec.yml"
+    buildspec = "infra/buildspec.yml"
   }
 }
 
