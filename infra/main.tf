@@ -118,7 +118,8 @@ resource "aws_iam_role_policy" "codepipeline_codebuild" {
         ],
         Resource = [
           aws_codebuild_project.lambda_build.arn,
-          aws_codebuild_project.terraform_build.arn
+          aws_codebuild_project.terraform_build.arn,
+          aws_codebuild_project.terraform_apply.arn
         ]
       }
     ]
