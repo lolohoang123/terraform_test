@@ -17,7 +17,7 @@ phases:
     commands:
       - echo "Updating Lambda code..."
       - ls -a
-      - aws lambda update-function-code \
+      - aws lambda update-function-code --region ap-southeast-1\
           --function-name sum_function \
           --zip-file fileb://build/lambda.zip
 artifacts:
