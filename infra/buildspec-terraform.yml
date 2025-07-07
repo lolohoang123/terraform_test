@@ -25,3 +25,4 @@ artifacts:
     - infra/tfplan
     - infra/plan.json
     - infra/buildspec-terraform-apply.yml
+    - infra/.terraform.lock.hcl
