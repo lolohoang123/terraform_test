@@ -113,7 +113,7 @@ resource "aws_iam_role_policy" "codepipeline_s3_policy" {
         "s3:PutObject",
         "s3:ListBucket"
       ],
-        Resource = var.artifact_bucket_arn
+        Resource = [var.artifact_bucket_arn, "arn:aws:s3:::terraform-plan-review/*"]
       }
     ]
   })
